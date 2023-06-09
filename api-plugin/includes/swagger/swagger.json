@@ -1,0 +1,123 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "My Custom API",
+      "description": "REST API for managing posts",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/my-custom-api/v1/posts": {
+        "get": {
+          "summary": "Get all posts",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Post"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/my-custom-api/v1/posts/{id}": {
+        "get": {
+          "summary": "Get a specific post by ID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "description": "ID of the post",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Post": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "featured_image": {
+              "type": "string"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Category"
+              }
+            },
+            "content": {
+              "type": "string"
+            },
+            "meta_fields": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/MetaField"
+              }
+            }
+          }
+        },
+        "Category": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "MetaField": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
